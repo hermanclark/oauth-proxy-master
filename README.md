@@ -4,6 +4,7 @@ Version 1.0 (alpha)
 
 This is the first iteration of the OAuth and ProxyURL. Only the proxy has been implemented as of this writing (July, 2017)
 
+The iteration with OAuth has been implemented as of March, 2018. 
 
 ## Configuration - ProxyURL
 
