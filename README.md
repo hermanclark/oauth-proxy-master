@@ -405,11 +405,7 @@ Verifying the Central Auth Token
 Currently any application in the `*.nwea.org` domain will be able to access the "token" cookie issued by `login.nwea.org`.  This token will be sent to the Profile API `/auth` service where it will be combined with application restrictions and additional restrictions based on the security groups returned by `login.nwea.org`.
 
 
-<<<<<<< HEAD
 ![OAuth Flow diagram](https://github.com/hermanclark/oauth-proxy-master/edit/main/oauthflow.png)
-=======
-![OAuth Flow diagram](https://github.com/BST-ITS-NWEA/oauth-proxy/blob/master/oauthflow.png)
->>>>>>> 093571e (Initial commit)
 
 ### New /auth service
 
@@ -447,12 +443,7 @@ The actual flow for this resource will require it to use three resources:
 
 ### Verify Existing Login Token
 
-<<<<<<< HEAD
-![OAuth Flow diagram](https://github.com/hermanclark/oauth-proxy-master/edit/main/)
-=======
-![OAuth Flow diagram](https://github.com/BST-ITS-NWEA/oauth-proxy/blob/master/tokenflow.png)
-
->>>>>>> 093571e (Initial commit)
+![OAuth Flow diagram](https://github.com/BST-ITS-NWEA/oauth-proxy/blob/main/tokenflow.png)
 All subsequent calls will require the access token to be present as a bearer token as in
 
 ```
