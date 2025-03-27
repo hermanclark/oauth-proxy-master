@@ -443,7 +443,7 @@ The actual flow for this resource will require it to use three resources:
 
 ### Verify Existing Login Token
 
-![OAuth Flow diagram](https://github.com/BST-ITS-NWEA/oauth-proxy/tokenflow.png)
+![OAuth Flow diagram](tokenflow.png)
 All subsequent calls will require the access token to be present as a bearer token as in
 
 ```
