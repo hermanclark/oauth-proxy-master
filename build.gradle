@@ -1,0 +1,109 @@
+buildscript {
+	ext {
+	 	springBootVersion = '1.5.4.RELEASE'
+	 	//springBootVersion = '2.0.0.BUILD-SNAPSHOT'
+	}
+	
+    repositories {
+        jcenter()
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url 'http://repo.spring.io/milestone' }
+    }
+    dependencies {
+		//classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE")
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'java-library-distribution'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+distZip.shouldRunAfter(build)
+
+task copyFiles{
+    copy{
+        from ('build/resources/main/META-INF/build-info.properties'){
+    }
+    into 'src/main/java/META-INF'
+    }
+}
+
+jar {
+    baseName = 'oauthproxy-rest'
+    version =  '1.0'
+     manifest {
+        attributes("Implementation-Version": version)
+    }
+}
+
+war {
+    baseName = 'oauthproxy-rest-web'
+    version =  '1.0'
+}
+
+repositories {
+    jcenter()
+    maven { url 'http://repo.spring.io/snapshot' }
+    maven { url 'http://repo.spring.io/milestone' }
+}
+
+bootRun {
+    addResources = true
+}
+
+configurations {
+	providedRuntime
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+springBoot {
+    // This statement tells the Gradle Spring Boot plugin
+    // to generate a file
+    // build/resources/main/META-INF/build-info.properties
+    // that is picked up by Spring Boot to display
+    // via /info endpoint.
+    buildInfo() {
+        additionalProperties = [
+                version: jar.version
+        ]
+    }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    //testCompile("org.springframework.boot:spring-boot-starter-test")
+	compile 'org.springframework.security:spring-security-web:4.2.3.RELEASE'
+    compile 'org.springframework.security:spring-security-config:4.2.3.RELEASE'
+    compile 'org.springframework.security:spring-security-core:4.2.3.RELEASE'
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    compile 'org.hamcrest:hamcrest-library:1.3'
+    // -- January 29, 2018 -- commented out line below...
+    //providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+	//compile "io.springfox:springfox-swagger2:2.6.1"
+	//compile("org.springframework.security.oauth:spring-security-oauth2:2.0.4.RELEASE")
+	    compile group: 'org.json', name: 'json', version: '20170516'
+    compile group: 'com.google.guava', name: 'guava', version: '23.0'
+    compile group: 'org.springframework', name: 'spring-context-support', version: '4.0.0.RELEASE'
+   
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.0'
+}
+
+//task fatJar(type: Jar) {
+//    baseName = 'oauthproxy-rest'
+//    version =  '1.0' 
+//    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+//    with jar
+//}
