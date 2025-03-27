@@ -405,7 +405,7 @@ Verifying the Central Auth Token
 Currently any application in the `*.nwea.org` domain will be able to access the "token" cookie issued by `login.nwea.org`.  This token will be sent to the Profile API `/auth` service where it will be combined with application restrictions and additional restrictions based on the security groups returned by `login.nwea.org`.
 
 
-![OAuth Flow diagram](https://github.com/hermanclark/oauth-proxy-master/oauthflow.png)
+![OAuth Flow diagram](oauthflow.png)
 
 ### New /auth service
 
